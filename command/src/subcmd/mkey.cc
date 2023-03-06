@@ -37,16 +37,19 @@ void mkey::run() {
         return;
     }
 
+    /* printf name and public key */
     printf("%13s: %s\n", "Curve name", m_name.c_str());
     printf("%13s: " "\033[1;36m" "%s" "\033[0m" "\n", "Public key", 
         fmt::format("{:02x}", fmt::join(pub, "")).c_str());
+
+    /* compress public key if flag set */
     if (m_pubcompress) {
-        
         uECC_compress(pub.data(), pubcompr.data(), curve);
         printf("%13s: " "\033[1;35m" "%s" "\033[0m" " (compressed)\n", "Public key", 
             fmt::format("{:02x}", fmt::join(pubcompr, "")).c_str() );
     }
 
+    /* printf private key if path empty */
     if (m_prvp.empty()) {
         printf("%13s: " "\033[1;33m" "%s" "\033[0m" "\n", "Private key", 
             fmt::format("{:02x}", fmt::join(prv, "")).c_str());
@@ -59,6 +62,7 @@ void mkey::run() {
         prfs.write((char*)prv.data(), prv.size());
     }
 
+    /* write to file if path valid */
     if (!m_pubp.empty()) {
         pufs.open(m_pubp, std::ios::binary|std::ios::out|std::ios::trunc);
         if (!pufs.good()) {
