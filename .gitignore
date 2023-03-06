@@ -6,3 +6,7 @@ __pycache__
 *.pyz
 *.egg-info/
 .DS_Store
+.vscode
+.xmake
+.build
+.dst
