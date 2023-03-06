@@ -8,5 +8,5 @@ __pycache__
 .DS_Store
 .vscode
 .xmake
-.build
-.dst
+build
+dst
