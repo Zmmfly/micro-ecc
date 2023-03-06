@@ -1,0 +1,10 @@
+add_requires("mbedtls", "cryptopp", "cli11", "fmt")
+target("uecc")
+    set_kind("binary")
+    set_languages("c++20")
+    set_warnings("error")
+    add_files("src/**.cc")
+    add_includedirs("inc")
+    add_deps("uECC")
+
+    add_packages("cryptopp", "cli11", "mbedtls", "fmt")
