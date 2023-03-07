@@ -1,4 +1,4 @@
-add_requires("mbedtls", "cryptopp", "cli11", "fmt")
+add_requires("cryptopp", "cli11", "fmt", "spdlog")
 target("uecc")
     set_kind("binary")
     set_languages("c++20")
@@ -7,4 +7,4 @@ target("uecc")
     add_includedirs("inc")
     add_deps("uECC")
 
-    add_packages("cryptopp", "cli11", "mbedtls", "fmt")
+    add_packages("cryptopp", "cli11", "fmt", "spdlog")

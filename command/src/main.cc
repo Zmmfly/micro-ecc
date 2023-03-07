@@ -10,6 +10,7 @@ int main(int argc, char **argv)
     auto a = std::make_shared<CLI::App>("uECC toolbox");
 
     subcmd::mkey mkkey(a);
+    subcmd::dsa dsa(a);
 
     a->require_subcommand(1);
 
