@@ -1,9 +1,22 @@
 micro-ecc
 ==========
+English | [中文](./README.zh_CN.md)
 
 A small and fast ECDH and ECDSA implementation for 8-bit, 32-bit, and 64-bit processors.
 
 The static version of micro-ecc (ie, where the curve was selected at compile-time) can be found in the "static" branch.
+
+Build
+--------
+Just run xmake[(click for details)](https://xmake.io), mico-ecc static library and command tool will be in `dst` directory
+```
+$ xmake
+```
+
+
+Command tool
+--------
+See [./command/README.zh_CN.md](./command/README.zh_CN.md)
 
 Features
 --------
