@@ -43,11 +43,9 @@ void mkey::run() {
         fmt::format("{:02x}", fmt::join(pub, "")).c_str());
 
     /* compress public key if flag set */
-    if (m_pubcompress) {
-        uECC_compress(pub.data(), pubcompr.data(), curve);
-        printf("%13s: " "\033[1;35m" "%s" "\033[0m" " (compressed)\n", "Public key", 
-            fmt::format("{:02x}", fmt::join(pubcompr, "")).c_str() );
-    }
+    uECC_compress(pub.data(), pubcompr.data(), curve);
+    printf("%13s: " "\033[1;35m" "%s" "\033[0m" " (compressed)\n", "Public key", 
+        fmt::format("{:02x}", fmt::join(pubcompr, "")).c_str() );
 
     /* printf private key if path empty */
     if (m_prvp.empty()) {
