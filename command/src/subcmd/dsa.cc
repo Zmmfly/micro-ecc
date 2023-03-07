@@ -74,12 +74,12 @@ bool dsa::chkFileAndMap()
     /* check length */
     if (m_length == 0) {
         size_t signsize = uECC_curve_public_key_size(m_curve);
-        size_t need = m_offset + (m_signATEnd ? signsize : 0) + 1;
+        size_t need = m_offset + ((m_signATEnd && m_isVerify) ? signsize : 0) + 1;
         if (need > m_imap.size()) {
             spdlog::error("The length is not specified, the file size({}) is not enough for need({})",
                 m_imap.size(), need);
         }
-        m_length = m_imap.size() - m_offset - (m_signATEnd ? signsize : 0);
+        m_length = m_imap.size() - (m_offset + ((m_signATEnd && m_isVerify) ? signsize : 0));
 
     } else {
         if (m_offset + m_length > m_imap.size()) 
@@ -253,10 +253,11 @@ bool dsa::signVerifyOut() {
             ofs.seekp(m_offset+m_length, std::ios::beg);
             ofs.write((char*)m_sign.data(), m_sign.size());
             ofs.close();
+            spdlog::info("signature write to end");
         }
 
         /* write signature to file */
-        if (!m_sign.empty()) {
+        if (!m_sign.empty() && !m_signPath.empty()) {
             std::fstream ofs(m_signPath, std::ios::binary|std::ios::out);
             if (!ofs.is_open()) {
                 spdlog::error("open signature output file fail");
